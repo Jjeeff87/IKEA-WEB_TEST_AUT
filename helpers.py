@@ -5,7 +5,7 @@ import requests
 
 
 def is_url_reachable(url, timeout=10):
-    """Verifica se uma URL está acessível (usada para checar se o site está no ar)."""
+    """Checks whether a URL is reachable (used to verify that the site is up)."""
     try:
         response = requests.get(url, timeout=timeout)
         return response.status_code < 500
@@ -14,10 +14,10 @@ def is_url_reachable(url, timeout=10):
 
 
 def human_type(element, text, min_delay=0.06, max_delay=0.18):
-    """Digita um texto caractere por caractere com pequenas pausas aleatórias,
-    imitando digitação humana em vez de preencher o campo instantaneamente
-    (send_keys(text) de uma vez só). Reduz a chance de o comportamento do
-    teste parecer obviamente automatizado.
+    """Types text character by character with small random pauses, mimicking
+    human typing instead of filling the field instantly (send_keys(text) all
+    at once). Reduces the chance of the test's behavior looking obviously
+    automated.
     """
     for character in text:
         element.send_keys(character)
@@ -25,6 +25,6 @@ def human_type(element, text, min_delay=0.06, max_delay=0.18):
 
 
 def human_pause(min_delay=0.4, max_delay=1.2):
-    """Pequena pausa aleatória entre ações (ex: depois de um clique, antes do próximo passo),
-    simulando o tempo de reação de uma pessoa real."""
+    """Short random pause between actions (e.g. after a click, before the next step),
+    simulating a real person's reaction time."""
     time.sleep(random.uniform(min_delay, max_delay))

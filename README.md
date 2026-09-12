@@ -1,51 +1,71 @@
-# SiteIKEA — Automação de testes (busca de produtos ikea.pt)
+# SiteIKEA: Test Automation (ikea.pt product search)
 
-Testes automatizados em Python/Selenium para o fluxo de **busca de produtos** do
-site [ikea.pt](https://www.ikea.pt).
+The first project in this series: automated Python/Selenium tests for the
+**product search** flow on the [ikea.pt](https://www.ikea.pt) site. The Page
+Object Model structure I use here ended up becoming the starting point for the
+other automation projects on my list.
 
-## Estrutura
+## Structure
 
-| Arquivo | Papel |
+| File | Role |
 |---|---|
-| `data.py` | URL do site e termos de busca usados nos testes |
-| `helpers.py` | Utilitários: checar site no ar, digitação/pausas "humanizadas" |
+| `data.py` | Site URL and search terms used in the tests |
+| `helpers.py` | Utilities: checking that the site is up, "humanized" typing/pauses |
 | `IKEA.py` | Page Objects: `IkeaHomePage`, `IkeaSearchResultsPage`, `IkeaProductPage` |
-| `TestersiteIkea.py` | Testes pytest |
+| `TestersiteIkea.py` | Pytest tests |
 
-## Sobre a digitação "humanizada"
+## About "humanized" typing
 
-Em vez de preencher o campo de busca instantaneamente, `helpers.human_type` digita
-caractere por caractere com pequenas pausas aleatórias, e `helpers.human_pause`
-insere pausas curtas entre ações — deixando a automação com um ritmo mais parecido
-com o de uma pessoa real interagindo com o site.
+Instead of filling the search field instantly, `helpers.human_type` types
+character by character with small random pauses, and `helpers.human_pause`
+inserts short pauses between actions, giving the automation a pace closer to
+that of a real person interacting with the site.
 
-## Casos de teste
+## Test cases
 
-- Busca por um termo válido ("cadeira") retorna resultados.
-- Busca por um termo inexistente mostra a mensagem "Sem resultados para...".
-- Abrir o primeiro produto da lista exibe título e preço.
-- Adicionar o primeiro produto ao carrinho.
+- Searching for a valid term ("cadeira") returns results.
+- Searching for a nonexistent term shows the "Sem resultados para..." message.
+- Opening the first product in the list shows its title and price.
+- Adding the first product to the cart.
 
-## Instalação
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Requer o [ChromeDriver](https://chromedriver.chromium.org/) compatível com sua
-versão do Chrome no PATH.
+Requires [ChromeDriver](https://chromedriver.chromium.org/) matching your
+Chrome version, available on PATH.
 
-## Rodando os testes
+## Running the tests
 
 ```bash
-pytest TestersiteIkea.py -v
+pytest -v
 ```
 
-## Publicando no GitHub
+The project's `pytest.ini` configures pytest to recognize `TestersiteIkea.py`
+as a test file (its name does not follow the `test_*.py` pattern that pytest
+looks for by default), so `pytest -v` on its own already finds and runs
+everything.
+
+## Code quality
+
+```bash
+pip install -r requirements-dev.txt
+black --check .
+flake8 .
+```
+
+CI (GitHub Actions, in `.github/workflows/tests.yml`) installs Chrome and
+runs the full suite on every push/PR.
+
+## Publishing to GitHub
 
 ```bash
 git add .
-git commit -m "Automação de testes de busca de produtos - ikea.pt"
-git remote add origin <URL_DO_SEU_REPOSITORIO_GITHUB>
+git commit -m "Product search test automation - ikea.pt"
+git remote add origin <URL_OF_YOUR_GITHUB_REPOSITORY>
 git push -u origin master
 ```
+</content>
+</invoke>

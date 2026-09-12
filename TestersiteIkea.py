@@ -6,7 +6,7 @@ from IKEA import IkeaHomePage, IkeaSearchResultsPage, IkeaProductPage
 
 
 class TestIkeaSearch:
-    """Testes automatizados da busca de produtos no ikea.pt."""
+    """Automated tests for product search on ikea.pt."""
 
     @classmethod
     def setup_class(cls):
@@ -58,8 +58,8 @@ class TestIkeaSearch:
         product_page = IkeaProductPage(self.driver)
         product_page.add_to_cart()
 
-        # Verificação simples: o botão de carrinho no header deixa de estar vazio.
-        # (ajuste esta asserção depois de confirmar o comportamento exato do carrinho)
+        # Simple check: the cart button in the header stops being empty.
+        # (adjust this assertion once the exact cart behavior is confirmed)
         helpers.human_pause()
 
     @classmethod

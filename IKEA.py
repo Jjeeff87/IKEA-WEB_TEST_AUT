@@ -7,7 +7,7 @@ from helpers import human_type, human_pause
 
 
 class IkeaHomePage:
-    """Page Object da página inicial do ikea.pt (barra de busca)."""
+    """Page Object for the ikea.pt home page (search bar)."""
 
     SEARCH_INPUT = (By.CSS_SELECTOR, 'input[type="search"]')
     COOKIE_REJECT_BUTTON = (By.XPATH, '//button[contains(., "Rejeitar todos os cookies")]')
@@ -27,7 +27,7 @@ class IkeaHomePage:
             pass
 
     def search_for(self, term):
-        """Digita o termo de forma humanizada (caractere por caractere, com pausas) e confirma com Enter."""
+        """Types the term in a humanized way (with pauses) and confirms by pressing Enter."""
         search_box = self.wait.until(EC.element_to_be_clickable(self.SEARCH_INPUT))
         search_box.click()
         human_pause(0.2, 0.6)
@@ -37,12 +37,15 @@ class IkeaHomePage:
 
 
 class IkeaSearchResultsPage:
-    """Page Object da página de resultados de busca (/search/?q=...)."""
+    """Page Object for the search results page (/search/?q=...)."""
 
     RESULTS_COUNT_TEXT = (By.XPATH, '//*[contains(text(), "produtos para")]')
     NO_RESULTS_TEXT = (By.XPATH, '//*[contains(text(), "Sem resultados para")]')
     FIRST_PRODUCT_LINK = (By.XPATH, '(//a[contains(@href, "/p/")])[1]')
-    FIRST_PRODUCT_ADD_TO_CART_BUTTON = (By.XPATH, '(//button[contains(., "Adicionar") and contains(., "cesto")])[1]')
+    FIRST_PRODUCT_ADD_TO_CART_BUTTON = (
+        By.XPATH,
+        '(//button[contains(., "Adicionar") and contains(., "cesto")])[1]',
+    )
 
     def __init__(self, driver):
         self.driver = driver
@@ -69,9 +72,9 @@ class IkeaSearchResultsPage:
 
 
 class IkeaProductPage:
-    """Page Object da página de detalhe de um produto."""
+    """Page Object for a product detail page."""
 
-    PRODUCT_TITLE = (By.TAG_NAME, 'h1')
+    PRODUCT_TITLE = (By.TAG_NAME, "h1")
     PRICE = (By.XPATH, '//*[contains(text(), "€")]')
     QUANTITY_INPUT = (By.XPATH, '//input[@aria-label="Valor de entrada de quantidade"]')
     ADD_TO_CART_BUTTON = (By.XPATH, '(//button[contains(., "Adicionar ao cesto")])[1]')
